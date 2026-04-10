@@ -92,13 +92,12 @@ export default function CommunityNoteSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center border border-brand-primary hover:border-brand-accent/30 transition-all"
+          className="bg-brand-accent backdrop-blur-sm rounded-2xl p-8 text-center border border-brand-primary hover:border-brand-accent/30 transition-all"
         >
-          <AlertTriangle className="h-12 w-12 text-brand-accent mx-auto mb-4 animate-pulse" />
-          <h3 className="text-2xl font-bold text-brand-primary mb-4">
+          <h3 className="text-2xl font-bold mb-4 text-white">
             Important Disclaimer
           </h3>
-          <p className="text-brand-accent leading-relaxed max-w-3xl mx-auto mb-6">
+          <p className="text-brand-primary leading-relaxed max-w-3xl mx-auto mb-6">
             MILLIONBONE is a community-driven project and cryptocurrency investment carries inherent risks. 
             Please do your own research, never invest more than you can afford to lose, and be aware that 
             cryptocurrency markets are highly volatile.
@@ -107,22 +106,22 @@ export default function CommunityNoteSection() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
             <div className="bg-white/5 rounded-xl p-4 border border-white/10 hover:bg-white/10 hover:border-brand-accent/30 transition-all">
               <div className="text-brand-primary font-bold mb-1">Not Financial Advice</div>
-              <div className="text-brand-accent text-sm">DYOR Always</div>
+              <div className="text-white text-sm">DYOR Always</div>
             </div>
             <div className="bg-white/5 rounded-xl p-4 border border-white/10 hover:bg-white/10 hover:border-brand-accent/30 transition-all">
               <div className="text-brand-primary font-bold mb-1">High Risk Investment</div>
-              <div className="text-brand-accent text-sm">Can Lose Value</div>
+              <div className="text-white text-sm">Can Lose Value</div>
             </div>
             <div className="bg-white/5 rounded-xl p-4 border border-white/10 hover:bg-white/10 hover:border-brand-accent/30 transition-all">
               <div className="text-brand-primary font-bold mb-1">Community Project</div>
-              <div className="text-brand-accent text-sm">Decentralized</div>
+              <div className="text-white text-sm">Decentralized</div>
             </div>
           </div>
 
           {/* Verification Badge */}
           <div className="mt-6 flex items-center justify-center gap-2 text-xs text-white/40">
             <CheckCircle className="w-3 h-3 text-brand-accent" />
-            <span className='text-brand-primary'>Audited Smart Contract • Liquidity Locked • Team KYC Verified</span>
+            <span className='text-black'>Audited Smart Contract • Liquidity Locked • Team KYC Verified</span>
           </div>
         </motion.div>
       </div>

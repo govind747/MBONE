@@ -67,10 +67,10 @@ export default function RoadmapPreviewSection() {
               <Zap className="w-3 h-3 fill-current" />
               FUTURE-PROOFED ROADMAP
             </div>
-            <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.8] mb-6">
+            <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.8] mb-6 text-brand-primary">
               THE <span className="text-brand-accent">TRAJECTORY.</span>
             </h2>
-            <p className="text-lg text-white/40 font-medium max-w-md">
+            <p className="text-lg text-brand-primary font-medium max-w-md">
               A non-linear growth strategy focused on long-term protocol utility and holder appreciation.
             </p>
           </motion.div>
@@ -85,14 +85,14 @@ export default function RoadmapPreviewSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className={`relative group bg-white/5 border border-white/10 rounded-[2.5rem] p-10 transition-all duration-500 hover:bg-white/[0.08] ${
+              className={`relative group bg-brand-secondary border border-white/10 rounded-[2.5rem] p-10 transition-all duration-500 hover:bg-brand-primary ${
                 phase.status === 'active' ? 'border-brand-accent/50 shadow-[0_0_40px_rgba(255,145,77,0.1)]' : ''
               }`}
             >
               {/* Top Row: Icon and Status */}
               <div className="flex justify-between items-start mb-12">
                 <div className={`p-4 rounded-2xl ${
-                  phase.status === 'active' ? 'bg-brand-accent text-brand-primary' : 'bg-white/5 text-white/40'
+                  phase.status === 'active' ? 'bg-brand-accent text-brand-primary' : 'bg-white/5 text-white'
                 }`}>
                   <phase.icon size={28} />
                 </div>
@@ -160,7 +160,7 @@ export default function RoadmapPreviewSection() {
           className="mt-20 flex flex-col items-center"
         >
           <Link href="/roadmap">
-            <button className="group bg-transparent border-2 border-white/10 hover:border-brand-accent px-12 py-5 rounded-2xl flex items-center gap-4 transition-all duration-300">
+            <button className="group bg-brand-primary border-2 border-white/70 hover:border-brand-accent px-12 py-5 rounded-2xl flex items-center gap-4 transition-all duration-300">
               <span className="font-black text-white text-lg tracking-widest group-hover:text-brand-accent transition-colors">
                 EXPLORE FULL PROTOCOL TIMELINE
               </span>

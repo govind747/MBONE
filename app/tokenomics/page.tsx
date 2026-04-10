@@ -5,7 +5,7 @@ import TokenomicsHero from '@/components/tokenomics/TokenomicsHero';
 import DistributionSection from '@/components/tokenomics/DistributionSection';
 import TaxMechanismSection from '@/components/tokenomics/TaxMechanismSection';
 import BurnAndRewardsSection from '@/components/tokenomics/BurnAndRewardsSection';
-import CommunityNoteSection from '@/components/contact/CommunityNoteSection'; // Reusing for consistency
+import RoadmapPreviewSection from '@/components/tokenomics/RoadmapPreviewSection';
 
 export const metadata = {
   title: 'Protocol Economics | MILLIONBONE ($MBONE)',
@@ -31,11 +31,11 @@ export default function TokenomicsPage() {
           {/* 3. TAX MECHANISM: The "Value Capture" (Matches "Core Values" Card Style) */}
           <TaxMechanismSection />
 
+          {/* 5. SAFETY & DISCLAIMERS: Reusing the same component for 1:1 look */}
+          <RoadmapPreviewSection />
+
           {/* 4. BURN PROTOCOLS: "Scarcity Engineering" (Matches "Security" Section) */}
           <BurnAndRewardsSection />
-
-          {/* 5. SAFETY & DISCLAIMERS: Reusing the same component for 1:1 look */}
-          <CommunityNoteSection />
 
           {/* FINAL CTA: THE BUY BUTTON (Matches About Us Footer) */}
           <section className="py-32 bg-gradient-to-t from-brand-accent/10 to-transparent border-t border-white/5">

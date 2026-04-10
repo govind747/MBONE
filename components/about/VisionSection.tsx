@@ -64,7 +64,7 @@ export default function VisionSection() {
                   <vision.icon className="h-8 w-8" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-black text-brand-primary mb-4 tracking-tight">
+                  <h3 className="text-2xl font-black text-brand-primary mb-4 tracking-tight group-hover:text-brand-accent transition-colors">
                     {vision.title}
                   </h3>
                   <p className="text-brand-secondary/70 leading-relaxed text-lg font-medium">
