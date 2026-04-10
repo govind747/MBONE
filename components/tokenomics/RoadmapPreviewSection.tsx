@@ -2,129 +2,150 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { CircleCheck as CheckCircle, Clock, Target, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Zap, Target, ArrowRight, Activity, Cpu } from 'lucide-react';
 
 export default function RoadmapPreviewSection() {
   const phases = [
     {
-      phase: 'Phase 1',
-      title: 'Foundation',
+      phase: 'PHASE 01',
+      title: 'PROTOCOL GENESIS',
       status: 'completed',
-      icon: CheckCircle,
+      icon: ShieldCheck,
+      description: 'The architectural launch and liquidity hardening period.',
       items: [
-        'Token Launch & Liquidity',
-        'Community Building',
-        'Initial Marketing Push',
-        'Burn Mechanism Activation'
+        'Smart Contract Finalization',
+        'Tier-1 Liquidity Lock',
+        'Genesis Burn Event',
+        'Global Seed Community'
       ]
     },
     {
-      phase: 'Phase 2',
-      title: 'Growth',
+      phase: 'PHASE 02',
+      title: 'ECOSYSTEM VELOCITY',
       status: 'active',
-      icon: Clock,
+      icon: Activity,
+      description: 'Scaling the utility layer and institutional bridge-building.',
       items: [
-        'Major Exchange Listings',
-        'Strategic Partnerships',
-        'Staking Platform Launch',
-        'Community Governance'
+        'CEX Liquidity Expansion',
+        'Merchant SDK Beta',
+        'Reflective Yield V2',
+        'On-Chain Governance'
       ]
     },
     {
-      phase: 'Phase 3',
-      title: 'Expansion',
+      phase: 'PHASE 03',
+      title: 'GLOBAL DOMINANCE',
       status: 'upcoming',
-      icon: Target,
+      icon: Cpu,
+      description: 'Full-scale retail integration and cross-chain utility.',
       items: [
-        'NFT Ecosystem',
-        'Mobile App Development',
-        'Cross-Chain Bridge',
-        'Utility Integration'
+        'Omni-Chain Protocol',
+        'Mobile Payment Gateway',
+        'Partner API Marketplace',
+        'Legacy Fiat Bridge'
       ]
     }
   ];
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'completed':
-        return 'text-green-500 bg-green-100';
-      case 'active':
-        return 'text-blue-500 bg-blue-100';
-      case 'upcoming':
-        return 'text-gray-500 bg-gray-100';
-      default:
-        return 'text-gray-500 bg-gray-100';
-    }
-  };
-
   return (
-    <section className="py-20 bg-gradient-to-br from-brand-background to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-black text-brand-primary mb-4">
-            ROADMAP PREVIEW
-          </h2>
-          <p className="text-xl text-brand-secondary max-w-2xl mx-auto">
-            Our journey to the moon - planned phases of development and growth
-          </p>
-        </motion.div>
+    <section className="py-32 bg-[#F5FBE6] relative overflow-hidden text-white">
+      {/* Background Neon Glows */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="max-w-2xl text-left"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-brand-accent text-[10px] font-black tracking-[0.3em] mb-6">
+              <Zap className="w-3 h-3 fill-current" />
+              FUTURE-PROOFED ROADMAP
+            </div>
+            <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.8] mb-6">
+              THE <span className="text-brand-accent">TRAJECTORY.</span>
+            </h2>
+            <p className="text-lg text-white/40 font-medium max-w-md">
+              A non-linear growth strategy focused on long-term protocol utility and holder appreciation.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Roadmap Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {phases.map((phase, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white rounded-2xl p-8 hover-lift shadow-lg border"
+              className={`relative group bg-white/5 border border-white/10 rounded-[2.5rem] p-10 transition-all duration-500 hover:bg-white/[0.08] ${
+                phase.status === 'active' ? 'border-brand-accent/50 shadow-[0_0_40px_rgba(255,145,77,0.1)]' : ''
+              }`}
             >
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center space-x-3">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${getStatusColor(phase.status)}`}>
-                    <phase.icon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-brand-accent uppercase tracking-wide">
-                      {phase.phase}
-                    </div>
-                    <h3 className="text-brand-primary font-bold text-lg">
-                      {phase.title}
-                    </h3>
-                  </div>
+              {/* Top Row: Icon and Status */}
+              <div className="flex justify-between items-start mb-12">
+                <div className={`p-4 rounded-2xl ${
+                  phase.status === 'active' ? 'bg-brand-accent text-brand-primary' : 'bg-white/5 text-white/40'
+                }`}>
+                  <phase.icon size={28} />
+                </div>
+                <div className={`text-[10px] font-black px-3 py-1 rounded-md tracking-widest uppercase ${
+                  phase.status === 'active' ? 'bg-brand-accent/20 text-brand-accent animate-pulse' : 'bg-white/10 text-white/30'
+                }`}>
+                  {phase.status}
                 </div>
               </div>
 
-              <div className="space-y-3">
-                {phase.items.map((item, itemIndex) => (
-                  <div key={itemIndex} className="flex items-center space-x-3">
-                    <div className={`w-2 h-2 rounded-full ${
-                      phase.status === 'completed' 
-                        ? 'bg-green-500' 
-                        : phase.status === 'active' 
-                          ? 'bg-blue-500' 
-                          : 'bg-gray-300'
-                    }`}></div>
-                    <span className="text-brand-secondary font-medium">
+              {/* Content */}
+              <div className="mb-8">
+                <span className="text-brand-accent font-mono text-sm font-bold tracking-widest mb-2 block">
+                  {phase.phase}
+                </span>
+                <h3 className="text-3xl font-black tracking-tighter text-white mb-4 italic">
+                  {phase.title}
+                </h3>
+                <p className="text-white/50 text-sm font-medium leading-relaxed">
+                  {phase.description}
+                </p>
+              </div>
+
+              {/* Checklist */}
+              <div className="space-y-4 pt-8 border-t border-white/10">
+                {phase.items.map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className={`w-1.5 h-1.5 rounded-full ${
+                      phase.status === 'completed' ? 'bg-brand-accent' : 'bg-white/20'
+                    }`} />
+                    <span className={`text-sm font-bold ${
+                      phase.status === 'completed' ? 'text-white/80 line-through decoration-brand-accent/50' : 'text-white/60'
+                    }`}>
                       {item}
                     </span>
                   </div>
                 ))}
               </div>
 
+              {/* Progress Indicator for Active Phase */}
               {phase.status === 'active' && (
-                <div className="mt-6 bg-blue-50 rounded-xl p-4">
-                  <div className="text-blue-600 font-bold text-sm mb-1">
-                    CURRENTLY IN PROGRESS
+                <div className="mt-10">
+                  <div className="flex justify-between text-[10px] font-black text-brand-accent mb-2 tracking-widest">
+                    <span>DEPLOYMENT PROGRESS</span>
+                    <span>75%</span>
                   </div>
-                  <div className="bg-blue-200 rounded-full h-2">
-                    <div className="bg-blue-500 rounded-full h-2 w-2/3"></div>
+                  <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                    <motion.div 
+                      initial={{ width: 0 }}
+                      whileInView={{ width: '75%' }}
+                      transition={{ duration: 1.5, ease: "easeOut" }}
+                      className="h-full bg-brand-accent"
+                    />
                   </div>
                 </div>
               )}
@@ -132,31 +153,20 @@ export default function RoadmapPreviewSection() {
           ))}
         </div>
 
+        {/* Full Roadmap Link */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-16 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="mt-20 flex flex-col items-center"
         >
-          <div className="bg-white rounded-2xl p-8 shadow-lg border inline-block">
-            <h3 className="text-2xl font-bold text-brand-primary mb-4">
-              Want More Details?
-            </h3>
-            <p className="text-brand-secondary mb-6">
-              Check out our complete roadmap with detailed timelines and milestones
-            </p>
-            <Link href="/roadmap">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-brand-accent text-white px-6 py-3 rounded-full font-bold flex items-center space-x-2 hover:bg-opacity-90 transition-all shadow-lg mx-auto"
-              >
-                <span>VIEW FULL ROADMAP</span>
-                <ArrowRight className="h-4 w-4" />
-              </motion.button>
-            </Link>
-          </div>
+          <Link href="/roadmap">
+            <button className="group bg-transparent border-2 border-white/10 hover:border-brand-accent px-12 py-5 rounded-2xl flex items-center gap-4 transition-all duration-300">
+              <span className="font-black text-white text-lg tracking-widest group-hover:text-brand-accent transition-colors">
+                EXPLORE FULL PROTOCOL TIMELINE
+              </span>
+              <ArrowRight className="text-white group-hover:text-brand-accent group-hover:translate-x-2 transition-all" />
+            </button>
+          </Link>
         </motion.div>
       </div>
     </section>

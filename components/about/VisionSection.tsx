@@ -1,91 +1,111 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Eye, Globe, Lightbulb, Target } from 'lucide-react';
+import { Eye, Globe, Lightbulb, Target, Compass, Zap } from 'lucide-react';
 
 export default function VisionSection() {
   const visions = [
     {
-      icon: Eye,
-      title: 'Long-term Vision',
-      description: 'Building a sustainable ecosystem that rewards loyalty and creates lasting value for our community members.'
+      icon: Compass,
+      title: 'Institutional Sustainability',
+      description: 'Moving beyond short-term volatility to build a deflationary ecosystem that scales with global commerce demand.'
     },
     {
       icon: Globe,
-      title: 'Global Community',
-      description: 'Connecting diamond hands from around the world in a unified mission to revolutionize meme coin culture.'
+      title: 'Borderless Network',
+      description: 'Unifying a global pack of 1M+ holders through a frictionless, decentralized payment and governance layer.'
     },
     {
-      icon: Lightbulb,
-      title: 'Innovation Focus',
-      description: 'Constantly evolving our tokenomics and features based on community feedback and market dynamics.'
+      icon: Zap,
+      title: 'Agile Innovation',
+      description: 'A protocol engineered to evolve. We integrate the latest DeFi advancements to keep $MBONE at the frontier.'
     },
     {
       icon: Target,
-      title: 'Clear Goals',
-      description: 'Transparent roadmap with achievable milestones that benefit every member of the MILLIONBONE pack.'
+      title: 'Strategic Milestones',
+      description: 'A non-linear roadmap focused on high-impact merchant partnerships and cross-chain liquidity expansion.'
     }
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-brand-background to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-black text-brand-primary mb-4">
-            OUR VISION
-          </h2>
-          <p className="text-xl text-brand-secondary max-w-2xl mx-auto">
-            Looking beyond the moon - our long-term vision for the MILLIONBONE ecosystem
-          </p>
-        </motion.div>
+    <section className="py-32 bg-white relative overflow-hidden">
+      {/* Background Radial Gradient for "Focus" */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-accent/5 via-transparent to-transparent pointer-events-none" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center mb-24">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-5xl md:text-7xl font-black text-brand-primary mb-6 tracking-tighter"
+          >
+            THE NORTH <span className="text-brand-accent">STAR.</span>
+          </motion.h2>
+          <p className="text-xl text-brand-secondary/60 max-w-2xl mx-auto font-medium">
+            We aren&apos;t just building a token; we are architecting the future of community-owned commerce.
+          </p>
+        </div>
+
+        {/* Vision Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 mb-20">
           {visions.map((vision, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white rounded-2xl p-8 hover-lift shadow-lg border"
+              className="group bg-[#F8F9FA] rounded-[2.5rem] p-10 border-t-4 border-transparent hover:border-brand-accent hover:bg-white transition-all duration-500 shadow-sm hover:shadow-2xl"
             >
-              <div className="bg-brand-accent/10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
-                <vision.icon className="h-8 w-8 text-brand-accent" />
+              <div className="flex items-start gap-8">
+                <div className="bg-white p-4 rounded-2xl shadow-sm text-brand-primary group-hover:bg-brand-accent group-hover:text-white transition-all duration-300">
+                  <vision.icon className="h-8 w-8" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-black text-brand-primary mb-4 tracking-tight">
+                    {vision.title}
+                  </h3>
+                  <p className="text-brand-secondary/70 leading-relaxed text-lg font-medium">
+                    {vision.description}
+                  </p>
+                </div>
               </div>
-              
-              <h3 className="text-brand-primary font-bold text-xl mb-4">
-                {vision.title}
-              </h3>
-              
-              <p className="text-brand-secondary leading-relaxed text-lg">
-                {vision.description}
-              </p>
             </motion.div>
           ))}
         </div>
 
+        {/* The "Ultimate Goal" Callout */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="mt-16 bg-white rounded-2xl p-8 shadow-lg border text-center"
+          className="relative group"
         >
-          <h3 className="text-2xl font-bold text-brand-primary mb-4">
-            The Ultimate Goal
-          </h3>
-          <p className="text-lg text-brand-secondary leading-relaxed max-w-3xl mx-auto">
-            To establish MILLIONBONE as the premier community-driven meme coin that 
-            demonstrates how transparency, innovation, and genuine care for holders 
-            can create sustainable value in the crypto space. We're not just reaching 
-            for the moon—we're building a rocket ship that can take us to the stars.
-          </p>
+          {/* Decorative Glow */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-brand-primary to-brand-accent rounded-[3rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+          
+          <div className="relative bg-brand-primary rounded-[3rem] p-12 md:p-20 text-center overflow-hidden">
+            {/* Background Texture */}
+            <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+            
+            <div className="relative z-10">
+              <h3 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tighter">
+                THE FINAL <span className="text-brand-accent">FRONTIER</span>
+              </h3>
+              <p className="text-xl md:text-2xl text-white/80 leading-relaxed max-w-4xl mx-auto font-medium">
+                To establish <span className="text-white font-black underline decoration-brand-accent decoration-4">MILLIONBONE</span> as the global benchmark for decentralized value exchange. We are creating a self-sustaining economic engine where community governance meets institutional-grade utility.
+              </p>
+              
+              <div className="mt-12 flex justify-center gap-4">
+                <div className="h-2 w-12 bg-brand-accent rounded-full" />
+                <div className="h-2 w-2 bg-white/20 rounded-full" />
+                <div className="h-2 w-2 bg-white/20 rounded-full" />
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

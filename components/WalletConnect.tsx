@@ -1,113 +1,122 @@
-'use client'
+'use client';
 
-import { useState, useEffect, useRef } from 'react'
-import { useAccount, useDisconnect } from 'wagmi'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { motion, AnimatePresence } from 'framer-motion'
-import {
-  Wallet,
-  User,
-  ShoppingCart,
-  History,
-  FileText,
-  LogOut,
-  ChevronDown,
-} from 'lucide-react'
-import Link from 'next/link'
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Wallet, LogOut } from 'lucide-react';
 
-export default function WalletConnect() {
-  const { address, isConnected } = useAccount()
-  const { disconnect } = useDisconnect()
-  const [open, setOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+interface WalletConnectProps {
+  onConnect?: (address: string) => void;
+}
 
-  // Close dropdown on outside click
+export default function WalletConnect({ onConnect }: WalletConnectProps) {
+  const [address, setAddress] = useState<string | null>(null);
+  const [isConnecting, setIsConnecting] = useState(false);
+
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setOpen(false)
+    // Check if already connected
+    const checkConnection = async () => {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+          if (accounts[0]) {
+            setAddress(accounts[0]);
+            onConnect?.(accounts[0]);
+            window.dispatchEvent(new CustomEvent('walletConnected', { 
+              detail: { address: accounts[0] } 
+            }));
+          }
+        } catch (error) {
+          console.error('Error checking connection:', error);
+        }
       }
+    };
+    
+    checkConnection();
+
+    // Listen for account changes
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', (accounts: string[]) => {
+        if (accounts[0]) {
+          setAddress(accounts[0]);
+          onConnect?.(accounts[0]);
+          window.dispatchEvent(new CustomEvent('walletConnected', { 
+            detail: { address: accounts[0] } 
+          }));
+        } else {
+          setAddress(null);
+          window.dispatchEvent(new CustomEvent('walletDisconnected'));
+        }
+      });
     }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [])
 
-  const menuItems = [
-    { icon: User, label: 'Dashboard', href: '/dashboard' },
-    { icon: User, label: 'Profile', href: '/profile' },
-    { icon: ShoppingCart, label: 'Cart', href: '/cart' },
-    { icon: History, label: 'Order History', href: '/history' },
-    { icon: FileText, label: 'Transactions', href: '/transactions' },
-  ]
+    return () => {
+      if (window.ethereum) {
+        window.ethereum.removeListener('accountsChanged', () => {});
+      }
+    };
+  }, [onConnect]);
 
-  if (!isConnected) {
+  const connectWallet = async () => {
+    if (!window.ethereum) {
+      alert('Please install MetaMask or another Web3 wallet!');
+      window.open('https://metamask.io/download/', '_blank');
+      return;
+    }
+
+    setIsConnecting(true);
+    try {
+      const accounts = await window.ethereum.request({ 
+        method: 'eth_requestAccounts' 
+      });
+      setAddress(accounts[0]);
+      onConnect?.(accounts[0]);
+      window.dispatchEvent(new CustomEvent('walletConnected', { 
+        detail: { address: accounts[0] } 
+      }));
+    } catch (error) {
+      console.error('Error connecting wallet:', error);
+    } finally {
+      setIsConnecting(false);
+    }
+  };
+
+  const disconnectWallet = () => {
+    setAddress(null);
+    window.dispatchEvent(new CustomEvent('walletDisconnected'));
+  };
+
+  if (address) {
     return (
-      <ConnectButton.Custom>
-        {({ openConnectModal }) => (
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={openConnectModal}
-            className="bg-brand-accent text-white px-6 py-2 rounded-full font-bold flex items-center gap-2"
-          >
-            <Wallet className="h-4 w-4" />
-            Connect Wallet
-          </motion.button>
-        )}
-      </ConnectButton.Custom>
-    )
+      <div className="flex items-center gap-2">
+        <div className="hidden md:block text-sm">
+          <span className="text-gray-500">Connected:</span>
+          <span className="ml-1 font-mono text-xs">
+            {`${address.slice(0, 6)}...${address.slice(-4)}`}
+          </span>
+        </div>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={disconnectWallet}
+          className="p-2 hover:bg-red-50 rounded-full transition-colors"
+          title="Disconnect"
+        >
+          <LogOut className="w-5 h-5 text-red-500" />
+        </motion.button>
+      </div>
+    );
   }
 
   return (
-    <div className="relative" ref={dropdownRef}>
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={() => setOpen(!open)}
-        className="bg-brand-primary text-white px-6 py-2 rounded-full font-bold flex items-center gap-2"
-      >
-        <Wallet className="h-4 w-4" />
-        {address?.slice(0, 6)}…{address?.slice(-4)}
-        <ChevronDown className="h-4 w-4" />
-      </motion.button>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-lg border z-50"
-          >
-            <div className="py-2">
-              {menuItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 text-brand-secondary"
-                >
-                  <item.icon className="h-4 w-4" />
-                  {item.label}
-                </Link>
-              ))}
-
-              <hr className="my-2" />
-
-              <button
-                onClick={() => {
-                  disconnect()
-                  setOpen(false)
-                }}
-                className="flex items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-50 w-full text-left"
-              >
-                <LogOut className="h-4 w-4" />
-                Disconnect
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  )
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={connectWallet}
+      disabled={isConnecting}
+      className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-full font-semibold hover:bg-opacity-90 transition-colors disabled:opacity-50"
+    >
+      <Wallet className="w-4 h-4" />
+      {isConnecting ? 'Connecting...' : 'Connect Wallet'}
+    </motion.button>
+  );
 }

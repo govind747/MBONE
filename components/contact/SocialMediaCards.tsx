@@ -91,7 +91,7 @@ export default function SocialMediaCards() {
                     <h3 className="text-brand-primary font-bold text-xl mb-1">
                       {social.name}
                     </h3>
-                    <p className="text-brand-secondary font-medium">
+                    <p className="text-brand-accent font-medium">
                       {social.handle}
                     </p>
                   </div>

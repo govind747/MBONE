@@ -1,125 +1,134 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, Twitter, MessageCircle, Users, Instagram, Bone } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, Twitter, MessageCircle, Users, Instagram, Bone, ShieldCheck, Zap } from 'lucide-react';
 
 export default function Footer() {
   const socialLinks = [
-    { icon: Twitter, href: '#', label: 'Twitter' },
+    { icon: Twitter, href: '#', label: 'X / Twitter' },
     { icon: MessageCircle, href: '#', label: 'Telegram' },
     { icon: Users, href: '#', label: 'Discord' },
     { icon: Instagram, href: '#', label: 'Instagram' },
   ];
 
-  const customerServiceLinks = [
-    { href: '/customer-service', label: 'Customer Service' },
-    { href: '/shipping-rates', label: 'Shipping Rates' },
-    { href: '/policy', label: 'Policy' },
-    { href: '/business', label: 'Business' },
-    { href: '/faqs', label: 'FAQs' },
-    { href: '/support-ticket', label: 'Support Ticket' },
+  const protocolLinks = [
+    { href: '/', label: 'HOME' },
+    { href: '/about', label: 'ABOUT' },
+    { href: '/tokenomics', label: 'TOKENOMICS' },
+    { href: '/contact', label: 'CONTACT' },
+    { href: '/whitepaper', label: 'WHITEPAPER' },
   ];
 
   return (
-    <footer className="bg-brand-secondary text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Logo & Description */}
-          <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <Bone className="h-8 w-8 text-brand-accent" />
-              <span className="text-xl font-bold tracking-wide">MILLIONBONE</span>
+    <footer className="bg-[#05070A] text-white pt-24 border-t border-white/5 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Top Section: Brand & Navigation */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
+          
+          {/* Logo & Protocol Info */}
+          <div className="md:col-span-5">
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="bg-brand-accent p-2 rounded-xl">
+                <Bone className="h-6 w-6 text-brand-primary" fill="currentColor" />
+              </div>
+              <span className="text-2xl font-black tracking-tighter uppercase italic">
+                MILLION<span className="text-brand-accent">BONE</span>
+              </span>
             </div>
-            <p className="text-gray-300 mb-4 max-w-md">
-              A premium community-driven meme coin built for diamond hands. 
-              Join the pack and hunt the moon with $MBONE.
+            <p className="text-white/40 text-lg font-medium leading-relaxed mb-8 max-w-sm">
+              The premier hyper-deflationary protocol for the next generation of decentralized commerce. Engineered for the Pack.
             </p>
-            <div className="flex items-center space-x-2 text-gray-300">
-              <Mail className="h-4 w-4" />
-              <a href="mailto:hello@millionbone.com" className="hover:text-brand-accent transition-colors">
-                hello@millionbone.com
-              </a>
+            <div className="inline-flex items-center gap-4 px-4 py-2 bg-white/5 border border-white/10 rounded-xl">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <span className="text-[10px] font-black tracking-[0.2em] text-white/60">MAINNET ACTIVE // v2.0</span>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-bold text-lg mb-4">Quick Links</h3>
-            <div className="space-y-2">
-              <Link href="/" className="block text-gray-300 hover:text-brand-accent transition-colors">
-                Home
-              </Link>
-              <Link href="/about" className="block text-gray-300 hover:text-brand-accent transition-colors">
-                About
-              </Link>
-              <Link href="/tokenomics" className="block text-gray-300 hover:text-brand-accent transition-colors">
-                Tokenomics
-              </Link>
-              <Link href="/contact" className="block text-gray-300 hover:text-brand-accent transition-colors">
-                Contact
-              </Link>
+          {/* Protocol Links */}
+          <div className="md:col-span-3">
+            <h3 className="text-xs font-black text-brand-accent tracking-[0.3em] uppercase mb-8">Navigation</h3>
+            <div className="space-y-4">
+              {protocolLinks.map((link) => (
+                <Link 
+                  key={link.label}
+                  href={link.href} 
+                  className="block text-white/50 hover:text-white font-bold text-sm tracking-widest transition-all hover:translate-x-2"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
 
-          {/* Social Links */}
-          <div>
-            <h3 className="font-bold text-lg mb-4">Community</h3>
-            <div className="grid grid-cols-2 gap-3 mb-6">
+          {/* Community Uplinks */}
+          <div className="md:col-span-4">
+            <h3 className="text-xs font-black text-brand-accent tracking-[0.3em] uppercase mb-8">Community Uplinks</h3>
+            <div className="grid grid-cols-2 gap-4">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
-                  className="flex items-center space-x-2 text-gray-300 hover:text-brand-accent transition-colors"
+                  className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-brand-accent/50 hover:bg-white/10 transition-all group"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Icon className="h-4 w-4" />
-                  <span className="text-sm">{label}</span>
+                  <Icon className="h-5 w-5 text-white/30 group-hover:text-brand-accent transition-colors" />
+                  <span className="text-[10px] font-black tracking-widest text-white/60 group-hover:text-white uppercase">{label}</span>
                 </a>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Customer Service Links */}
-        <div className="border-t border-gray-600 mt-8 pt-6">
-          <h3 className="font-bold text-lg mb-4 text-center">Customer Service</h3>
-          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8">
-            {customerServiceLinks.map((link, index) => (
-              <span key={link.href} className="flex items-center">
-                <Link 
-                  href={link.href} 
-                  className="text-gray-300 hover:text-brand-accent transition-colors text-sm md:text-base"
-                >
-                  {link.label}
-                </Link>
-                {index < customerServiceLinks.length - 1 && (
-                  <span className="text-gray-500 ml-4 md:ml-8">|</span>
-                )}
-              </span>
-            ))}
-          </div>
-        </div>
-
-          {/* Banner Image above Customer Service */}
-        <div className="relative w-full h-[60vh] md:h-[70vh]  mt-8"> 
+        {/* Cinematic Banner Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative w-full h-[40vh] md:h-[60vh] rounded-[3rem] overflow-hidden border border-white/10"
+        > 
           <Image
             src="/image/footerbnr.png"
-            alt="MILLIONBONE Banner"
+            alt="MILLIONBONE Protocol"
             fill
-            priority
-            className="object-cover"
+            className="object-cover transition-transform duration-1000 hover:scale-105"
           />
-          {/* optional overlay */}
-          <div className="absolute inset-0 bg-black/20" />
-        </div>
+          {/* High-Contrast Vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#05070A] via-transparent to-[#05070A]/20" />
+          
+          <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-center w-full">
+            <div className="text-white/20 font-black text-[10px] tracking-[1em] uppercase mb-4">
+              Authorized Ecosystem 2026
+            </div>
+            <div className="flex justify-center gap-2">
+              <div className="w-12 h-1 bg-brand-accent" />
+              <div className="w-4 h-1 bg-white/20" />
+              <div className="w-4 h-1 bg-white/20" />
+            </div>
+          </div>
+        </motion.div>
 
-        <div className="border-t border-gray-600 mt-8 pt-8 text-center">
-          <p className="text-gray-400">
-            © 2024 MILLIONBONE. All rights reserved. Community-driven project.
-          </p>
-          <p className="text-gray-500 text-sm mt-2">
-            This is not financial advice. Cryptocurrency investments are risky.
-          </p>
+        {/* Legal & Compliance */}
+        <div className="py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-6">
+            <div className="text-[10px] font-black text-white/20 tracking-widest uppercase">
+              © 2026 MILLIONBONE CORE
+            </div>
+            <div className="h-4 w-px bg-white/10" />
+            <a href="mailto:liaison@millionbone.com" className="text-[10px] font-black text-white/40 hover:text-brand-accent tracking-widest uppercase transition-colors">
+              LIAISON@MILLIONBONE.COM
+            </a>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <ShieldCheck className="w-4 h-4 text-brand-accent" />
+            <span className="text-[10px] font-mono text-white/30 tracking-widest uppercase">
+              DYOR: Not Financial Advice. Engage with Risk Awareness.
+            </span>
+          </div>
         </div>
       </div>
     </footer>

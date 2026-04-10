@@ -1,125 +1,148 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Users, Droplets, Zap, Lock } from 'lucide-react';
+import { Users, Droplets, Zap, Lock, ShieldCheck, Globe } from 'lucide-react';
 
 export default function DistributionSection() {
   const distribution = [
     {
-      icon: Users,
-      title: 'Community Sale',
+      icon: Globe,
+      title: 'PUBLIC LIQUIDITY & GENESIS',
       percentage: '85%',
-      amount: '850M $MBONE',
-      description: 'Public sale and liquidity provision for fair distribution',
-      color: 'bg-brand-primary'
+      amount: '850,000,000 $MBONE',
+      status: 'UNLOCKED / CIRCULATING',
+      description: 'The heartbeat of the protocol. Allocated for fair-market entry and deep liquidity provision across primary DEXs.',
+      span: 'md:col-span-2',
+      theme: 'bg-brand-accent/5 border-brand-accent/20',
+      textColor: 'text-brand-accent'
     },
     {
       icon: Droplets,
-      title: 'Marketing & Partnerships',
+      title: 'MARKETING & ADOPTION',
       percentage: '10%',
-      amount: '100M $MBONE',
-      description: 'Strategic partnerships and marketing initiatives',
-      color: 'bg-brand-accent'
+      amount: '100,000,000 $MBONE',
+      status: 'VESTED / 12 MO',
+      description: 'Strategic reserves for exchange listings and global merchant partnerships.',
+      span: 'md:col-span-1',
+      theme: 'bg-white/5 border-white/10',
+      textColor: 'text-white'
     },
     {
       icon: Zap,
-      title: 'Development Fund',
-      percentage: '3%',
-      amount: '30M $MBONE',
-      description: 'Future development and ecosystem growth',
-      color: 'bg-brand-secondary'
-    },
-    {
-      icon: Lock,
-      title: 'Liquidity Reserve',
-      percentage: '2%',
-      amount: '20M $MBONE',
-      description: 'Locked liquidity to ensure market stability',
-      color: 'bg-brand-highlight'
+      title: 'ECOSYSTEM GROWTH',
+      percentage: '5%',
+      amount: '50,000,000 $MBONE',
+      status: 'DAO CONTROLLED',
+      description: 'Governance-locked funds for future protocol development and security audits.',
+      span: 'md:col-span-1',
+      theme: 'bg-white/5 border-white/10',
+      textColor: 'text-white'
     }
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-black text-brand-primary mb-4">
-            TOKEN DISTRIBUTION
-          </h2>
-          <p className="text-xl text-brand-secondary max-w-2xl mx-auto">
-            Fair and transparent allocation ensuring maximum community ownership
-          </p>
-        </motion.div>
+    <section className="py-32 bg-[#F5FBE6] relative overflow-hidden text-white">
+      {/* Background Architectural Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-accent/5 rounded-full blur-[160px] pointer-events-none" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="max-w-2xl"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <ShieldCheck className="w-4 h-4 text-brand-accent" />
+              <span className="text-brand-accent font-black text-xs uppercase tracking-[0.3em]">Audited Allocation</span>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-black text-brand-primary tracking-tighter leading-[0.9]">
+              PROTOCOL <span className="text-brand-accent uppercase">Economics.</span>
+            </h2>
+          </motion.div>
+          <p className="text-lg text-brand-primary max-w-sm font-medium border-l border-brand-accent pl-6">
+            A zero-founder-tax model designed for pure decentralization and long-term market resilience.
+          </p>
+        </div>
+
+        {/* Bento Grid Distribution */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-b border-white py-12">
           {distribution.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative group"
+              className={`${item.span} relative group overflow-hidden bg-gradient-to-br ${item.theme} border rounded-[2.5rem] p-8 md:p-12 transition-all hover:border-brand-accent/40`}
             >
-              <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 hover-lift shadow-lg border group-hover:border-brand-accent/50 transition-all duration-300">
-                <div className="flex items-start space-x-6">
-                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${item.color.replace('bg-', 'bg-')}/10`}>
-                    <item.icon className={`h-8 w-8 ${item.color.replace('bg-', 'text-')}`} />
+              {/* Dynamic Number Watermark */}
+              <div className="absolute -right-4 -top-4 text-[10rem] font-black text-white/[0.7] select-none group-hover:text-brand-accent/[0.03] transition-colors">
+                {item.percentage.replace('%', '')}
+              </div>
+
+              <div className="relative z-10 border-b border-white/70 mb-8 pb-8">
+                <div className="flex justify-between items-start mb-10">
+                  <div className="p-4 bg-brand-primary rounded-2xl border border-white/10 group-hover:bg-brand-accent group-hover:text-brand-primary transition-all duration-500">
+                    <item.icon size={28} />
                   </div>
-                  
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-3 mb-3">
-                      <h3 className="text-brand-primary font-bold text-lg">
-                        {item.title}
-                      </h3>
-                      <span className={`px-3 py-1 rounded-full text-white font-bold text-sm ${item.color}`}>
-                        {item.percentage}
-                      </span>
+                  <div className="text-right">
+                    <div className={`text-4xl text-brand-accent md:text-6xl font-black tracking-tighter ${item.textColor}`}>
+                      {item.percentage}
                     </div>
-                    
-                    <div className="text-2xl font-black text-brand-accent mb-2">
-                      {item.amount}
+                    <div className="text-[10px] font-black tracking-[0.2em] text-brand-primary uppercase mt-1">
+                      {item.status}
                     </div>
-                    
-                    <p className="text-brand-secondary leading-relaxed">
-                      {item.description}
-                    </p>
                   </div>
                 </div>
 
-                {/* Progress bar */}
-                <div className="mt-6 bg-gray-200 rounded-full h-2 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: item.percentage }}
-                    transition={{ duration: 1, delay: 0.5 + (index * 0.1) }}
-                    viewport={{ once: true }}
-                    className={`h-full rounded-full ${item.color}`}
-                  />
+                <div className="space-y-4">
+                  <h3 className="text-xl font-black tracking-widest text-brand-primary uppercase">{item.title}</h3>
+                  <div className="text-2xl font-mono text-brand-accent tracking-tighter font-bold">
+                    {item.amount}
+                  </div>
+                  <p className="text-brand-primary text-lg leading-relaxed max-w-md font-medium">
+                    {item.description}
+                  </p>
+                </div>
+
+                {/* Grid-Dot Progress Indicator */}
+                <div className="mt-10 flex gap-1.5 h-2">
+                   {[...Array(20)].map((_, i) => (
+                     <motion.div 
+                       key={i}
+                       initial={{ opacity: 0.1 }}
+                       whileInView={{ opacity: i < (parseInt(item.percentage) / 5) ? 1 : 0.1 }}
+                       className={`flex-1 rounded-sm ${i < (parseInt(item.percentage) / 5) ? (index === 0 ? 'bg-brand-accent' : 'bg-brand-accent') : 'bg-brand-accent/10'}`}
+                     />
+                   ))}
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
+        {/* Verification Banner */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-12 bg-gradient-to-r from-brand-primary to-brand-secondary rounded-2xl p-8 text-center text-white"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="mt-12 p-8 rounded-[2rem] bg-brand-accent flex flex-col md:flex-row items-center justify-between gap-6"
         >
-          <h3 className="text-2xl font-bold mb-4">Community Focused</h3>
-          <p className="text-lg leading-relaxed max-w-3xl mx-auto">
-            85% of all tokens are allocated directly to the community through public sale and liquidity. 
-            No team allocation, no private presales - just fair distribution for everyone who believes in the vision.
-          </p>
+          <div className="flex items-center gap-6">
+            <div className="p-4 bg-brand-primary rounded-2xl">
+              <Lock className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h4 className="text-brand-primary font-black text-xl leading-none mb-1">CONTRACTS VERIFIED & LOCKED</h4>
+              <p className="text-brand-primary/60 font-bold text-sm uppercase tracking-wider">Zero Mint Function • No Private Sales</p>
+            </div>
+          </div>
+          <button className="bg-brand-primary text-white px-8 py-4 rounded-xl font-black text-sm uppercase tracking-widest hover:scale-105 transition-transform">
+            View Smart Contract
+          </button>
         </motion.div>
       </div>
     </section>
